@@ -3,8 +3,8 @@ from datetime import datetime
 
 class Task:
     def __init__(self, name, description, project_association):
-        self.name = name
-        self.task_id = uuid.uuid5
+        self._name = name
+        self._task_idtask_id =str(uuid.uuid4())
         self.description = description
         self.status = False
         self.start_t = datetime.now()
@@ -12,21 +12,42 @@ class Task:
         self.duration = None
         self.prj_association = project_association
 
+    @property
+    def task_id(self):
+        return self._task_id
+    
     def mark_done(self):
         self.end_t = datetime.now()
         self.status = True
 
     def task_duration(self):
-        pass
+        if self._start_t and self._end_t:
+            self._duration = (self._end_t - self._start_t).total_seconds() / 3600
+        return self._duration
+    
+    def __str__(self):
+        status = "Done" if self.status else "Not Done"
+        return (f"Task ID: {self.task_id}, Name: {self.name}, Status: {status}, "
+                f"Start: {self.start_time}, End: {self.end_time}")
 
 
 class Projects:
     def __init__(self, name):
-        self.name = name
+        self._name = name
         self.tasks = {}
-
-    def add_task(self):
-        self.tasks[task.task_id] = uuid.uuid4
+    @property
+    def name(self):
+        return self._name
+    @name.setter
+    def name(self, value):
+        if value:
+            self._name = value
+        else:
+            raise ValueError("Project name cannot be empty.")
+    def __str__(self):
+        return f"Project: {self.name}, Number of Tasks: {len(self.tasks)}"
+    def add_task(self, task):
+        self.tasks[task.task_id] = task
 
     def remove_task(self, task_id):
         pass
