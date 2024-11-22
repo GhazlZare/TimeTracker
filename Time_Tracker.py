@@ -3,8 +3,8 @@ from datetime import datetime
 
 class Task:
     def __init__(self, name, description, project_association):
-        self._name = name
-        self._task_idtask_id =str(uuid.uuid4())
+        self.name = name
+        self._task_id = str(uuid.uuid4())
         self.description = description
         self.status = False
         self.start_t = datetime.now()
@@ -21,43 +21,53 @@ class Task:
         self.status = True
 
     def task_duration(self):
-        if self._start_t and self._end_t:
-            self._duration = (self._end_t - self._start_t).total_seconds() / 3600
-        return self._duration
+        if self.start_t and self.end_t:
+            self._duration = (self.end_t - self.start_t).total_seconds() / 3600
+        return self.duration
     
     def __str__(self):
         status = "Done" if self.status else "Not Done"
         return (f"Task ID: {self.task_id}, Name: {self.name}, Status: {status}, "
-                f"Start: {self.start_time}, End: {self.end_time}")
+                f"Start: {self.start_t}, End: {self.end_t}")
 
 
 class Projects:
     def __init__(self, name):
         self._name = name
         self.tasks = {}
+
     @property
     def name(self):
         return self._name
+
     @name.setter
     def name(self, value):
         if value:
             self._name = value
         else:
             raise ValueError("Project name cannot be empty.")
+
     def __str__(self):
         return f"Project: {self.name}, Number of Tasks: {len(self.tasks)}"
+
     def add_task(self, task):
-        self.tasks[task.task_id] = task
+        if task.task_id not in self.tasks:
+            self.tasks[task.task_id] = task
+        else:
+            raise ValueError("Task with this ID already exists in the project.")
 
     def remove_task(self, task_id):
-        pass
+        if task_id in self.tasks:
+            del self.tasks[task_id]
+        else:
+            raise ValueError("Task ID not found")
 
     def all_tasks(self):
-        return self.tasks.values
+        return list(self.tasks.values())
     
 
 class TimeTracker:
-    def __init__(self) -> None:
+    def __init__(self):
         self.pojects = {}
 
     def add_project(self, project_name):
@@ -87,3 +97,4 @@ class TimeTracker:
     def list_tasks(project):
         for task in project.list_tasks():
             pass
+
