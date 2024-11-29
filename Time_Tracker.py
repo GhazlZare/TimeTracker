@@ -118,7 +118,7 @@ class TimeTracker:
         project = self.get_project(project_name)
         project.remove_task(task_id)
 
-    def list_tasks(project):
-        for task in project.list_tasks():
-            pass
+    def list_tasks(self, project_name):
+        project = self.get_project(project_name)
+        return [str(task) for task in project.all_tasks()]
 
