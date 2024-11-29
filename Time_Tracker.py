@@ -114,7 +114,8 @@ class TimeTracker:
         else:
             raise ValueError("Task ID not found in project.")
 
-    def delete_task(project, task_id):
+    def delete_task(self, project_name, task_id):
+        project = self.get_project(project_name)
         project.remove_task(task_id)
 
     def list_tasks(project):
