@@ -68,7 +68,7 @@ class Projects:
 
 class TimeTracker:
     def __init__(self):
-        self.pojects = {}
+        self.projects = {}
 
     def add_project(self, project_name):
         self.projects[project.name] = project_name
