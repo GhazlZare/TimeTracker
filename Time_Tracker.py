@@ -123,9 +123,6 @@ class TimeTracker:
         return [str(task) for task in project.all_tasks()]
 
     def display_project_details(self, project_name):
-        """
-        Displays detailed information about a project, including its tasks.
-        """
         try:
             project = self.get_project(project_name)
             print(f"Project: {project.name}")
@@ -138,4 +135,12 @@ class TimeTracker:
                 print("No tasks available in this project.")
         except ValueError as e:
             print(str(e))
+
+    def search_task(self, search_term):
+        matching_tasks = []
+        for project in self.projects.values():
+            for task in project.all_tasks():
+                if search_term.lower() in task.name.lower() or search_term.lower() in task.description.lower():
+                    matching_tasks.append(task)
+        return matching_tasks
 
