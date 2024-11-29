@@ -71,7 +71,10 @@ class TimeTracker:
         self.projects = {}
 
     def add_project(self, project_name):
-        self.projects[project.name] = project_name
+        if project_name not in self.projects:
+            self.projects[project_name] = Projects(project_name)
+        else:
+            raise ValueError("Project with this name already exists.")
 
     def remove_project(self, project_name):
         pass
