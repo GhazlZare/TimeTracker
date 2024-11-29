@@ -92,7 +92,7 @@ class TimeTracker:
         return list(self.projects.keys())
 
     def create_project(time_tracker, project_name):
-        pass
+        self.add_project(project_name)
 
     def create_task(project, task_id, name, description):
         pass
