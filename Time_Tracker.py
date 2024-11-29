@@ -99,8 +99,20 @@ class TimeTracker:
         new_task = Task(name, description, project_name)
         project.add_task(new_task)
 
-    def edit_task(project, task_id, name=None, description=None, status=False, start_time=None, end_time=None):
-        pass
+    def edit_task(self, project_name, task_id, name=None, description=None, status=None):
+        project = self.get_project(project_name)
+        if task_id in project.tasks:
+            task = project.tasks[task_id]
+            if name is not None:
+                task.name = name
+            if description is not None:
+                task.description = description
+            if status is not None:
+                task.status = status
+                if status:  
+                    task.mark_done()
+        else:
+            raise ValueError("Task ID not found in project.")
 
     def delete_task(project, task_id):
         project.remove_task(task_id)
