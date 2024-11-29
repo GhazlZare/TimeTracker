@@ -149,17 +149,17 @@ def main():
 
     while True:
         print('''What do you want to do?
-1. Create project
-2. Create task
-3. Mark task done
-4. Add existing task to a project
-5. List tasks in a project
-6. Edit a task
-7. Delete task
-8. Display project details
-9. List all projects
-10. Search for a task
-11. Exit''')
+                1. Create project
+                2. Create task
+                3. Mark task done
+                4. Add existing task to a project
+                5. List tasks in a project
+                6. Edit a task
+                7. Delete task
+                8. Display project details
+                9. List all projects
+                10. Search for a task
+                11. Exit''')
         try:
             choice = int(input("Enter your choice: "))
             if choice == 1:
