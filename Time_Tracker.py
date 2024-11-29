@@ -122,3 +122,20 @@ class TimeTracker:
         project = self.get_project(project_name)
         return [str(task) for task in project.all_tasks()]
 
+    def display_project_details(self, project_name):
+        """
+        Displays detailed information about a project, including its tasks.
+        """
+        try:
+            project = self.get_project(project_name)
+            print(f"Project: {project.name}")
+            print(f"Number of Tasks: {len(project.tasks)}")
+            if project.tasks:
+                print("\nTasks:")
+                for task in project.all_tasks():
+                    print(task)
+            else:
+                print("No tasks available in this project.")
+        except ValueError as e:
+            print(str(e))
+
