@@ -77,10 +77,16 @@ class TimeTracker:
             raise ValueError("Project with this name already exists.")
 
     def remove_project(self, project_name):
-        pass
+        if project_name in self.projects:
+            del self.projects[project_name]
+        else:
+            raise ValueError("Project not found.")
 
     def get_project(self, project_name):
-        pass
+        if project_name in self.projects:
+            return self.projects[project_name]
+        else:
+            raise ValueError("Project not found.")
 
     def list_projects(self):
         pass
