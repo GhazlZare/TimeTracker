@@ -89,7 +89,7 @@ class TimeTracker:
             raise ValueError("Project not found.")
 
     def list_projects(self):
-        pass
+        return list(self.projects.keys())
 
     def create_project(time_tracker, project_name):
         pass
