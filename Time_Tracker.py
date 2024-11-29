@@ -91,11 +91,13 @@ class TimeTracker:
     def list_projects(self):
         return list(self.projects.keys())
 
-    def create_project(time_tracker, project_name):
+    def create_project(self, project_name):
         self.add_project(project_name)
 
-    def create_task(project, task_id, name, description):
-        pass
+    def create_task(self, project_name, name, description):
+        project = self.get_project(project_name)
+        new_task = Task(name, description, project_name)
+        project.add_task(new_task)
 
     def edit_task(project, task_id, name=None, description=None, status=False, start_time=None, end_time=None):
         pass
